@@ -169,3 +169,77 @@ const amplifyconfig = '''{
   }
 }''';
 ```
+
+## メモ：AppSyncのサブスクリプションを受信する方法
+
+下記にサンプルコードあり。
+
+- https://pub.dev/packages/amplify_api
+
+念の為コードの部分を引用して、下記に記載する。
+
+### パターン1. Streamを利用するケース
+
+この場合、forから抜けた時に自動でサブスクリプションがキャンセルされる。
+
+```dart
+Future<void> subscribe() async {
+  final graphQLDocument = '''subscription MySubscription {
+    onCreateBlog {
+      id
+      name
+      createdAt
+    }
+  }''';
+  final Stream<GraphQLResponse<String>> operation = Amplify.API.subscribe(
+    GraphQLRequest<String>(document: graphQLDocument),
+    onEstablished: () => print('Subscription established'),
+  );
+
+  try {
+    // Retrieve 5 events from the subscription
+    var i = 0;
+    await for (var event in operation) {
+      i++;
+      print('Subscription event data received: ${event.data}');
+      if (i == 5) {
+        break;
+      }
+    }
+  } on Exception catch (e) {
+    print('Error in subscription stream: $e');
+  }
+}
+```
+
+### パターン2. 明示的にlistenするケース
+
+この方法だと、明示的にプログラムでサブスクリプションをキャンセルできる。
+
+```dart
+Future<void> subscribe() async {
+  final graphQLDocument = '''subscription MySubscription {
+    onCreateBlog {
+      id
+      name
+      createdAt
+    }
+  }''';
+  final Stream<GraphQLResponse<String>> operation = Amplify.API.subscribe(
+    GraphQLRequest<String>(document: graphQLDocument),
+    onEstablished: () => print('Subscription established'),
+  );
+  final StreamSubscription<GraphQLResponse<String>> subscription =
+      operation.listen(
+    (event) {
+      print('Subscription event data received: ${event.data}');
+    },
+    onError: (Object e) => print('Error in subscription stream: $e'),
+  );
+
+  // ...
+
+  // Cancel the subscription and close the underlying stream.
+  subscription.cancel();
+}
+```

@@ -9,7 +9,7 @@ FlutterでAppSyncのサブスクリプション機能を試したい
 - 自分のAWSアカウント
 - AWS AppSync のリソース（otameshi_appsync_subscriptionという名前で筆者は作りました）
 - AWS AppSyncのデータソースとして使うDynamoDB
-- AWS AppSyncのエンドポイントやAPIキーなどの設定値を記述した `lib/amplifyconfiguration.dart`
+- **AWS AppSyncのエンドポイントやAPIキーなどの設定値を記述した `lib/amplifyconfiguration.dart` （あえてGit管理対象外にしているので、このリポジトリをクローンして試してみるときは、自分の環境に合わせた `lib/amplifyconfiguration.dart` を作成してください。一応、このREADME.mdの最後に `lib/amplifyconfiguration.dart` のサンプルを置いています）**
 
 ## AppSyncのスキーマ
 

@@ -1,16 +1,46 @@
 # flutter_otameshi_appsync_subscription
 
-A new Flutter project.
+## 動機
+FlutterでAppSyncのサブスクリプション機能を試したい
 
-## Getting Started
+## lib/amplifyconfiguration.dart
 
-This project is a starting point for a Flutter application.
+自分の環境に応じて下記のように設定する
 
-A few resources to get you started if this is your first Flutter project:
+```dart
+const amplifyconfig = '''{
+  "api": {
+    "plugins": {
+      "awsAPIPlugin": {
+        "otameshi_appsync_subscription": {
+          "endpointType": "GraphQL",
+          "endpoint": "[AppSyncのエンドポイント]",
+          "region": "[AppSyncのリージョン]",
+          "authorizationType": "API_KEY",
+          "apiKey": "[AppSyncのAPIキー]"
+        }
+      }
+    }
+  }
+}''';
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+値入りの例を書くと、次のようになる（APIキーなど、それぞれの値はダミー）
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+const amplifyconfig = '''{
+  "api": {
+    "plugins": {
+      "awsAPIPlugin": {
+        "otameshi_appsync_subscription": {
+          "endpointType": "GraphQL",
+          "endpoint": "https://xxxxxxxxxxxx.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+          "region": "ap-northeast-1",
+          "authorizationType": "API_KEY",
+          "apiKey": "xxx-xxxxxxxxxx"
+        }
+      }
+    }
+  }
+}''';
+```

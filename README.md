@@ -5,7 +5,9 @@ FlutterでAppSyncのサブスクリプション機能を試したい
 
 ## lib/amplifyconfiguration.dart
 
-自分の環境に応じて下記のように設定する
+APIキーを直書きしているので、あえてGit管理対象外にしている。
+
+このリポジトリをクローンして、AppSyncのサブスクリプション機能を試してみたければ、 `lib/amplifyconfiguration.dart` を作成して、自分の環境に応じて下記のように設定する。
 
 ```dart
 const amplifyconfig = '''{
@@ -25,7 +27,7 @@ const amplifyconfig = '''{
 }''';
 ```
 
-値入りの例を書くと、次のようになる（APIキーなど、それぞれの値はダミー）
+上記を値入りの例を書くと、次のようになる（APIキーなど、それぞれの値はダミー）
 
 ```dart
 const amplifyconfig = '''{

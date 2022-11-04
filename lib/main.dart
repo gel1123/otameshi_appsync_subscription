@@ -31,6 +31,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  /// サブスクリプション購読を開始するメソッド
   void _startSubscribe() async {
     const graphQLDocument = '''subscription otameshi_subscription {
       onCreateOtameshi_subscription {
@@ -56,6 +57,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  /// サブスクリプション購読を終了するメソッド
   void _stopSubscribe() {
     setState(() {
       subscription?.cancel();
@@ -64,12 +66,16 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  /// 初期化時にAmplifyの設定を行う
   @override
   void initState() {
     super.initState();
     _configureAmplify();
   }
 
+  /// 画面のフッター近辺にサブスクリプション購読開始/終了ボタンを配置する
+  /// また、画面中央には枠線で囲まれたスクロール可能エリアを配置し、
+  /// その中にサブスクリプションで受信したJSONを表示する
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
